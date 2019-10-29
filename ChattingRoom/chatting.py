@@ -25,9 +25,10 @@ Chatting room
 # addr = (1, 'a')
 # print("content {0[0]} {0[1]}".format(addr))
 
-a = input("lala")
+# a = input("lala")
+a = "lala"
 # print(type(a))
-
+print('\033[0;31m')
 print(a)
 
 # import sys
