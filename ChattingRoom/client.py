@@ -38,7 +38,7 @@ class Client(object):
         while True:
             recvData, recvAddr = socket.recvfrom(1024)
             if recvAddr != (self.hostIP, self.hostPort):      # discard data not from host
-                break
+                continue
             print('\033[0;32m')
             print(recvData.decode('utf-8'))
             print('\033[0m')
