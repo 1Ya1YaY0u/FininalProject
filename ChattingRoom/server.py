@@ -39,7 +39,8 @@ class Server(object):
             print('  ' + showName + recvData.decode('utf-8'))      # server is listening
             for addr in clients:    # forward data to all other clients
                 if addr != clientAddr:
-                    s.sendto(showName.encode('utf-8') + recvData, addr)
+                    # s.sendto(showName.encode('utf-8') + recvData, addr)
+                    s.sendto(recvData, addr)
         s.close()   # close socket
 
 
