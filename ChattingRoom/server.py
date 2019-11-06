@@ -31,7 +31,8 @@ class Server(object):
             # if recvData == sys.stdin(exit):    # stop recieving data
             if recvData == b'cmd -h':    # search chatting history(what this client said)
                 print("Client {} request to search chatting history\n".format(clientAddr))
-                tips = "\033[0;33mChatting history of client {}\033[0m\n".format(clientAddr).encode('utf-8')
+                # tips = "\033[0;33mChatting history of client {}\033[0m\n".format(clientAddr).encode('utf-8')
+                tips = "Chatting history of client {}\n".format(clientAddr).encode('utf-8')
                 s.sendto(tips + chattingHistory[clientAddr].encode('utf-8'), clientAddr)
                 continue
 
@@ -39,8 +40,8 @@ class Server(object):
             print('  ' + showName + recvData.decode('utf-8'))      # server is listening
             for addr in clients:    # forward data to all other clients
                 if addr != clientAddr:
-                    # s.sendto(showName.encode('utf-8') + recvData, addr)
-                    s.sendto(recvData, addr)
+                    s.sendto(showName.encode('utf-8') + recvData + b'\n', addr)
+                    # s.sendto(recvData, addr)
         s.close()   # close socket
 
 

@@ -12,10 +12,11 @@ class Client_wzk(object):
 
     def __init__(self, mytop):
         self.top = mytop
-        self.ip_entry = tk.Entry(self.top, width=80, bd=4)
+        self.ip_entry = tk.Entry(self.top, width=80)
         self.port_entry = tk.Entry(self.top, width=80)
         self.send_entry = tk.Entry(self.top, width=80)
-        self.recv_entry = tk.Entry(self.top, width=80)
+        self.recv_entry = tk.Text(self.top, width=80)
+        # self.empty_entry = tk.Entry(self.top, width=80)
         self.hostIP = '127.0.0.1'
         self.hostPort = 9999
         self.s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -48,6 +49,8 @@ class Client_wzk(object):
         # print("send thread")
         # inputData = bytes(input("->"), encoding='utf-8')    # waiting for input
         inputData = self.send_entry.get().encode('utf-8')
+        # self.send_entry.select_clear()      # clear input data
+        self.send_entry.delete(0, 100)
         # print("get send data")
         if inputData == b"exit":    # exit client
             # break
@@ -65,7 +68,7 @@ class Client_wzk(object):
             # print('\033[0;32m')
             # print(recvData.decode('utf-8'))
             # print('\033[0m')
-            self.recv_entry.insert(0, recvData.decode('utf-8'))    # blocked
+            self.recv_entry.insert(100.100, recvData.decode('utf-8'))    # blocked
 
     def window(self):
         self.top.title('Chatting Room       by Echo Wang')
@@ -77,7 +80,9 @@ class Client_wzk(object):
         self.ip_entry.grid(row=1, column=1)
         self.port_entry.grid(row=3, column=1)
         self.send_entry.grid(row=5, column=1)
+        # self.recv_entry.grid(row=7, column=1)
         self.recv_entry.grid(row=7, column=1)
+        # self.empty_entry.grid(row=8, column=1)
         startClient = tk.Button(self.top, text='Start Client', bg='green',
                                 command=self.startClient)
         sendData = tk.Button(self.top, text='Send', bg='green',
@@ -90,6 +95,7 @@ class Client_wzk(object):
 
 if __name__ == "__main__":
     top = tk.Tk()
+    # top.geometry('800x500')
     client = Client_wzk(top)
     client.window()
     top.mainloop()
