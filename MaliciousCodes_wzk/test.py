@@ -1,6 +1,7 @@
 # import sys
-import os
+# import os
 # import runFlag
+import subprocess
 
 
 # # os.system(r'notepad C:\Users\zhikangwang\Desktop\test.txt')
@@ -30,5 +31,15 @@ import os
 #         print(content)
 #         f.write("True")
 # cmd = os.system('ipconfig')
-cmd = os.popen('ipconfig')
-print(cmd.read())
+# cmd = os.popen('md newfile')
+# print(cmd.read())
+# x = input()
+# print(cmd.read())
+subp = subprocess.Popen('ipconfig', shell=True, stdin=subprocess.PIPE,
+                    stdout=subprocess.PIPE, stderr=subprocess.PIPE, encoding='gbk').communicate()
+# p.wait()
+# print(p.stdout.read())
+# print(subp[0])
+with open(r'C:\Users\zhikangwang\Desktop\a.txt', 'a') as f:
+    f.write(subp[0])
+# x = input()
