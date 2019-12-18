@@ -49,25 +49,29 @@ def get_html(url):
 # get content
 def get_chapter_list(html):
     """get the joke of the html"""
+    print(html)
     soup = BeautifulSoup(html, 'lxml')
     # joke_content = soup.select('#contents')[0].get_text()
     # head = soup.select('head')[0]
     # print("head:  \n", head)
-    chapter_list = soup.find(class_='listmain')
+    # chapter_list = soup.find(class_='listmain')
     # chapter_list = soup.find_all('a').get_text()
-    href = [i.get('href') for i in chapter_list.find_all('a')]
+    # href = [i.get('href') for i in chapter_list.find_all('a')]
     # print(str(chapter_list))
-    print(chapter_list)
+    # print(chapter_list)
     # print("href", href)
     # chapter_list = soup.select('.wrap')[0]
     # print("chapter_list.name:", chapter_list.name)
-    # content = soup.select('.listmain')[0].get_text()
+    content = soup.select('.showtxt')
+    print(content)
 
-    return chapter_list
+    # return chapter_list
+    return content
 
 
 if __name__ == '__main__':
     # app.run(debug=True)
-    url = "http://www.shuquge.com/txt/63542/index.html"
+    # url = "http://www.shuquge.com/txt/63542/index.html"
+    url = "http://www.shuquge.com/txt/8400/28344165.html"
     html = get_html(url)
     content = get_chapter_list(html)
